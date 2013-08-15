@@ -3,7 +3,7 @@
     var DROPBOX_APP_KEY = 'r4ceqin76u8k0iy';
     var MIN_HEIGHT = 300;
 
-    listItemPartial =   '<li><div class="list-item-container">' +
+    listItemPartial =   '<li data-index="{{i}}"><div class="list-item-container">' +
                             '<div' +
                                 ' proxy-tap="edit"' +
                                 ' class="description {{( completed ? \'completed\' : \'\' )}}">' +
@@ -11,9 +11,9 @@
                             '</div>' +
                             '{{#.editing}}' +
                             '<div proxy-tap="unedit" class="edit-container">' +
-                                ' <a>Done</a>' +
-                                ' <a>Tomorrow</a>' +
-                                ' <a>Forget</a>' +
+                                ' <a proxy-tap="done">Done</a>' +
+                                ' <a proxy-tap="tomorrow">Tomorrow</a>' +
+                                ' <a proxy-tap="forget">Forget</a>' +
                             '</div>' +
                             '{{/.editing}}' +
                         '</div></li>';
@@ -140,6 +140,7 @@
         var result = [];
         for (var i = 0; i < tasks.length; i++) {
             result.push({
+                ID: tasks[i].getId(),
                 description: tasks[i].get("description"),
                 completed: tasks[i].get("completed"),
                 editing: tasks[i].get("editing"),
@@ -183,8 +184,8 @@
         for (var i = 0; i < module.ractive.data.todayItems.length; i++) {
             module.ractive.data.todayItems[i].editing = false;
         }
-        for (var i = 0; i < module.ractive.data.tomorrowItems.length; i++) {
-            module.ractive.data.tomorrowItems[i].editing = false;
+        for (var k = 0; k < module.ractive.data.tomorrowItems.length; k++) {
+            module.ractive.data.tomorrowItems[k].editing = false;
         }
     };
 
@@ -257,13 +258,21 @@
                 _gaq.push(['_trackEvent', 'disconnect']);
                 signOff();
             },
-            edit: function ( event ) {
+            edit: function(event) {
                 unselectAllItems();
                 this.set(event.keypath + '.editing', true);
                 this.update();
             },
-            unedit: function ( event ) {
+            unedit: function(event) {
                 this.set(event.keypath + '.editing', false);
+            },
+            forget: function(event) {
+                module.taskTable.get(this.get(event.keypath + '.ID')).deleteRecord();
+                if(event.keypath.indexOf("todayItems") >= 0) {
+                    this.data.todayItems.splice(event.index.i, 1);
+                } else {
+                    this.data.tomorrowItems.splice(event.index.i, 1);
+                }
             },
             textboxEscape: function(event){
                 if (event.original.keyCode == 27) {
@@ -336,13 +345,13 @@
                     date: section == "today" ? module.getToday() : module.getTomorrow(),
                     position: section == "today" ? module.ractive.data.todayItems.length : module.ractive.data.tomorrowItems.length
                 };
+                newTask.ID = addItemToDropbox(newTask).getId();
                 if (section == "today") {
                     module.ractive.data.todayItems.push(newTask);
                 } else {
                     module.ractive.data.tomorrowItems.push(newTask);
                     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
                 }
-                addItemToDropbox(newTask);
                 event.node.value = "";
             },
             completed: function(event) {
