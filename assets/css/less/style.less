@@ -111,6 +111,16 @@ a {
             li {
                 padding-top: 20px;
                 padding-bottom: 20px;
+                .edit-container {
+                    background-color: #34e0de;
+                    a {
+                        color: #47918f;
+                        &:hover {
+                            color: #333;
+                            text-decoration: underline;
+                        }
+                    }
+                }
             }
         }
         .form-container {
@@ -177,6 +187,30 @@ a {
             user-select: none;
         &.completed {
             text-decoration: line-through;
+        }
+    }
+
+    .list-item-container {
+        position: relative;
+        .description {
+            position: absolute;
+            width: 100%;
+        }
+        .edit-container {
+            position: absolute;
+            width: 100%;   
+            cursor: pointer;
+            background-color: #FFF;
+            a {
+                color: #d4d4d4;
+                text-decoration: underline;
+                padding-left: 3px;
+                padding-right: 3px;
+                &:hover {
+                    color: #888888;
+                    text-decoration: underline;
+                }
+            }
         }
     }
 }

@@ -1,18 +1,22 @@
-Ractive.eventDefinitions.dbltap = function ( node, fire ) {
-    Hammer(node).on("doubletap", function(event) {
-        fire({
-            node: node,
-            original: event,
-            x: event.deltaX,
-            y: event.deltaY
-        });
-    });
-};
-
 ;(function($){
 
     var DROPBOX_APP_KEY = 'r4ceqin76u8k0iy';
     var MIN_HEIGHT = 300;
+
+    listItemPartial =   '<li><div class="list-item-container">' +
+                            '<div' +
+                                ' proxy-tap="edit"' +
+                                ' class="description {{( completed ? \'completed\' : \'\' )}}">' +
+                                '{{ description }}' +
+                            '</div>' +
+                            '{{#.editing}}' +
+                            '<div proxy-tap="unedit" class="edit-container">' +
+                                ' <a>Done</a>' +
+                                ' <a>Tomorrow</a>' +
+                                ' <a>Forget</a>' +
+                            '</div>' +
+                            '{{/.editing}}' +
+                        '</div></li>';
 
     var translations = {
         af: { today: "Vandag", tomorrow: "m&#244;re"},
@@ -175,6 +179,15 @@ Ractive.eventDefinitions.dbltap = function ( node, fire ) {
         return module.taskTable.insert(task);
     };
 
+    var unselectAllItems = function(){
+        for (var i = 0; i < module.ractive.data.todayItems.length; i++) {
+            module.ractive.data.todayItems[i].editing = false;
+        }
+        for (var i = 0; i < module.ractive.data.tomorrowItems.length; i++) {
+            module.ractive.data.tomorrowItems[i].editing = false;
+        }
+    };
+
     module.init = function(){
 
         $(window).resize(resizeBoxes);
@@ -190,6 +203,9 @@ Ractive.eventDefinitions.dbltap = function ( node, fire ) {
 
         module.ractive = new Ractive({
             el: '#app',
+            partials: {
+                listItem: listItemPartial
+            },
             template: '#template',
             data: {
                 user: null,
@@ -240,6 +256,14 @@ Ractive.eventDefinitions.dbltap = function ( node, fire ) {
             disconnect: function(){
                 _gaq.push(['_trackEvent', 'disconnect']);
                 signOff();
+            },
+            edit: function ( event ) {
+                unselectAllItems();
+                this.set(event.keypath + '.editing', true);
+                this.update();
+            },
+            unedit: function ( event ) {
+                this.set(event.keypath + '.editing', false);
             },
             textboxEscape: function(event){
                 if (event.original.keyCode == 27) {
