@@ -10,10 +10,10 @@
                                 '{{ description }}' +
                             '</div>' +
                             '{{#.editing}}' +
-                            '<div proxy-tap="unedit" class="edit-container">' +
-                                ' <a proxy-tap="done">Done</a>' +
-                                ' <a proxy-tap="tomorrow">Tomorrow</a>' +
-                                ' <a proxy-tap="forget">Forget</a>' +
+                            '<div class="edit-container">' +
+                                ' <a proxy-tap="done:{{i}}">Done</a>' +
+                                ' <a proxy-tap="tomorrow:{{i}}">Tomorrow</a>' +
+                                ' <a proxy-tap="forget:{{i}}">Forget</a>' +
                             '</div>' +
                             '{{/.editing}}' +
                         '</div></li>';
