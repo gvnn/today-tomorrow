@@ -10,10 +10,10 @@
                                 '{{ description }}' +
                             '</div>' +
                             '{{#.editing}}' +
-                            '<div class="edit-container">' +
-                                ' <a proxy-tap="done:{{i}}">Done</a>' +
-                                ' <a proxy-tap="tomorrow:{{i}}">Tomorrow</a>' +
-                                ' <a proxy-tap="forget:{{i}}">Forget</a>' +
+                            '<div proxy-click="unedit" class="edit-container">' +
+                                ' <a proxy-click="complete:{{i}}">{{( completed ? \'Not Done\' : \'Done\' )}}</a>' +
+                                ' <a proxy-click="tomorrow:{{i}}">Tomorrow</a>' +
+                                ' <a proxy-click="forget:{{i}}">Forget</a>' +
                             '</div>' +
                             '{{/.editing}}' +
                         '</div></li>';
@@ -187,7 +187,12 @@
         for (var k = 0; k < module.ractive.data.tomorrowItems.length; k++) {
             module.ractive.data.tomorrowItems[k].editing = false;
         }
+        module.ractive.update();
     };
+
+    var bumpTasks = function(){
+        // get all uncompleted tasks
+    }
 
     module.init = function(){
 
@@ -274,6 +279,13 @@
                     this.data.tomorrowItems.splice(event.index.i, 1);
                 }
             },
+            complete: function(event){
+                var task = this.get(event.keypath);
+                task.completed = !task.completed;
+                // dropbox update
+                module.taskTable.get(task.ID).set('completed', task.completed);
+                this.update();
+            },
             textboxEscape: function(event){
                 if (event.original.keyCode == 27) {
                     _gaq.push(['_trackEvent', 'textboxEscape']);
@@ -282,6 +294,7 @@
             },
             add: function(event, section){
                 _gaq.push(['_trackEvent', 'add', section]);
+                unselectAllItems();
                 switch(section){
                     case "today":
                         if(!module.ractive.data.addingToday) {
