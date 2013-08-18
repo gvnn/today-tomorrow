@@ -171,12 +171,14 @@
 
             module.datastore.recordsChanged.addListener(function (event) {
                 if (!event._local) {
-                    // push it to list
-                    var tasks = event._recordsByTable.tasks;
-                    console.log(tasks);
+                    showRefresh();
                 }
             });
         });
+    };
+
+    var showRefresh = function(){
+        $(".update").show();
     };
 
     var addItemToDropbox = function(task){
@@ -433,9 +435,13 @@ ga('create', 'UA-43273123-1', 'herokuapp.com');
 ga('send', 'pageview');
 
 $(function($){
-    if (window.location.protocol != "https:") {
-       window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
-    } else {
+    // if (window.location.protocol != "https:") {
+    //    window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+    // } else {
         $.fn.todayTomorrow.init();
-    }
+
+        $("#refresh").click(function(){
+            top.location.reload();
+        });
+    // }
 });
