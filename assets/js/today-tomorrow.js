@@ -433,5 +433,10 @@ ga('create', 'UA-43273123-1', 'herokuapp.com');
 ga('send', 'pageview');
 
 $(function($){
-    $.fn.todayTomorrow.init();
+    if (window.location.protocol != "https:") {
+       window.location.protocol = "https:";
+       window.location.reload();
+    } else {
+        $.fn.todayTomorrow.init();
+    }
 });
