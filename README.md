@@ -3,22 +3,22 @@ today-tomorrow
 
 The simpliest to-do application in the interwebs.
 
-# Thanks to...
+### Thanks to...
 
 - [Ractive.js](http://www.ractivejs.org/)
 - [Dropbox Datastore API](https://www.dropbox.com/developers/datastore)
 - [jQuery](http://jquery.com/)
 
-## Dropbox Datastore API
+#### Dropbox Datastore API
 
 To register your own application just go to the Dropbox [App Console](https://www.dropbox.com/developers/apps), 
 register your application and then replace the value of DROPBOX_APP_KEY variable in today-tomorrow.js.
 
-# Credits
+### Credits
 
 Coded by [@gvnnrules](http://twitter.com/gvnnrules) and designed by [@evsberg](http://twitter.com/evsberg)
 
-# License
+### License
 
 "THE BEER-WARE LICENSE" (Revision 42):
 
