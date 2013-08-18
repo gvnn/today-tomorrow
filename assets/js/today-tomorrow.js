@@ -12,7 +12,7 @@
                             '{{#.editing}}' +
                             '<div proxy-click="unedit" class="edit-container">' +
                                 ' <a proxy-click="complete:{{i}}">{{( completed ? \'Not Done\' : \'Done\' )}}</a>' +
-                                ' <a proxy-click="tomorrow:{{i}}">Tomorrow</a>' +
+                                ' <a proxy-click="move:{{( date == todayDate() ? \'tomorrow\' : \'today\' )}}">{{( date == todayDate() ? \'Tomorrow\' : \'Today\' )}}</a>' +
                                 ' <a proxy-click="forget:{{i}}">Forget</a>' +
                             '</div>' +
                             '{{/.editing}}' +
@@ -232,6 +232,9 @@
                 tomorrow: function(){
                     return module.lang.tomorrow;
                 },
+                todayDate: function(){
+                    return module.getToday().toString();
+                },
                 dir: function(){
                     return module.lang.dir ? module.lang.dir : "ltr";
                 }
@@ -260,7 +263,7 @@
 
         module.ractive.on({
             disconnect: function(){
-                _gaq.push(['_trackEvent', 'disconnect']);
+                ga('send', 'event', 'disconnect');
                 signOff();
             },
             edit: function(event) {
@@ -280,6 +283,7 @@
                 }
             },
             complete: function(event){
+                ga('send', 'event', 'complete');
                 var task = this.get(event.keypath);
                 task.completed = !task.completed;
                 // dropbox update
@@ -288,12 +292,28 @@
             },
             textboxEscape: function(event){
                 if (event.original.keyCode == 27) {
-                    _gaq.push(['_trackEvent', 'textboxEscape']);
+                    ga('send', 'event', 'textboxEscape');
                     $(event.node).blur();
                 }
             },
+            move: function(event, direction){
+                ga('send', 'event', 'move', direction);
+                var task = this.get(event.keypath);
+                task.date = (direction == "tomorrow" ? module.getTomorrow() : module.getToday());
+                task.editing = false;
+                module.taskTable.get(task.ID).set('date', task.date);
+                // push and splice
+                if(direction == "tomorrow") {
+                    this.data.todayItems.splice(event.index.i, 1);
+                    this.data.tomorrowItems.push(task);
+                } else {
+                    this.data.tomorrowItems.splice(event.index.i, 1);
+                    this.data.todayItems.push(task);
+                }
+                this.update();
+            },
             add: function(event, section){
-                _gaq.push(['_trackEvent', 'add', section]);
+                ga('send', 'event', 'add', section);
                 unselectAllItems();
                 switch(section){
                     case "today":
@@ -321,7 +341,7 @@
                 }
             },
             cancelAdd: function(event, section){
-                _gaq.push(['_trackEvent', 'cancelAdd', section]);
+                ga('send', 'event', 'cancelAdd', section);
                 switch(section){
                     case "today":
                         if(module.ractive.data.addingToday) {
@@ -350,7 +370,7 @@
                 }
             },
             addNew: function(event, section){
-                _gaq.push(['_trackEvent', 'addNew', section]);
+                ga('send', 'event', 'addNew', section);
                 var newTask = {
                     description: event.node.value,
                     completed: false,
@@ -379,15 +399,13 @@
 
 })(jQuery);
 
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-1239540-5']);
-_gaq.push(['_trackPageview']);
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-(function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = 'https://ssl.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
+ga('create', 'UA-43273123-1', 'herokuapp.com');
+ga('send', 'pageview');
 
 $(function($){
     $.fn.todayTomorrow.init();
