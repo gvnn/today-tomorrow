@@ -3,7 +3,7 @@ today-tomorrow
 
 The simpliest to-do application in the interwebs.
 
-[today-tomorrow-app.herokuapp.com](http://today-tomorrow-app.herokuapp.com)
+[today-tomorrow-app.herokuapp.com](https://today-tomorrow-app.herokuapp.com)
 
 ### Thanks to...
 
