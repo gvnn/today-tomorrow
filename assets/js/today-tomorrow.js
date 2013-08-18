@@ -157,6 +157,8 @@
             module.datastore = datastore;
             module.taskTable = datastore.getTable('tasks');
 
+            bumpTasks();
+
             var todayItems = loadTasks(module.getToday());
             var tomorrowItems = loadTasks(module.getTomorrow());
 
@@ -191,8 +193,16 @@
     };
 
     var bumpTasks = function(){
-        // get all uncompleted tasks
-    }
+        // get all uncompleted tasks... unfortunately dropbox datastore beta doesn't let more advance queries
+        var tasks = module.taskTable.query({ completed: false });
+        var todayDate = module.getToday();
+        for (var i = 0; i < tasks.length; i++) {
+            var task = tasks[i];
+            if (task.get("date") < todayDate) {
+                task.set("date", todayDate);
+            }
+        }
+    };
 
     module.init = function(){
 
