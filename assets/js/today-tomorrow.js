@@ -148,6 +148,7 @@
                 position: tasks[i].get("position")
             });
         }
+        result.sort(function(a,b){return a.position-b.position;});
         return result;
     };
 
@@ -180,6 +181,15 @@
 
     var addItemToDropbox = function(task){
         return module.taskTable.insert(task);
+    };
+
+    var resetPositions = function(itemsArray) {
+        for (var i = 0; i < itemsArray.length; i++) {
+            if (itemsArray[i].position != i) {
+                itemsArray[i].position = i;
+                module.taskTable.get(itemsArray[i].ID).set('position', i);
+            }
+        }
     };
 
     var unselectAllItems = function(){
@@ -288,8 +298,10 @@
                 module.taskTable.get(this.get(event.keypath + '.ID')).deleteRecord();
                 if(event.keypath.indexOf("todayItems") >= 0) {
                     this.data.todayItems.splice(event.index.i, 1);
+                    resetPositions(this.data.todayItems);
                 } else {
                     this.data.tomorrowItems.splice(event.index.i, 1);
+                    resetPositions(this.data.tomorrowItems);
                 }
             },
             complete: function(event){
@@ -310,14 +322,17 @@
                 ga('send', 'event', 'move', direction);
                 var task = this.get(event.keypath);
                 task.date = (direction == "tomorrow" ? module.getTomorrow() : module.getToday());
+                task.position =  (direction == "tomorrow" ? this.data.tomorrowItems.length : this.data.todayItems.length);
                 task.editing = false;
-                module.taskTable.get(task.ID).set('date', task.date);
+                module.taskTable.get(task.ID).update(task);
                 // push and splice
                 if(direction == "tomorrow") {
                     this.data.todayItems.splice(event.index.i, 1);
+                    resetPositions(this.data.todayItems);
                     this.data.tomorrowItems.push(task);
                 } else {
                     this.data.tomorrowItems.splice(event.index.i, 1);
+                    resetPositions(this.data.tomorrowItems);
                     this.data.todayItems.push(task);
                 }
                 this.update();
