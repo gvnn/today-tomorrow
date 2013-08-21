@@ -55,6 +55,42 @@ a {
 }
 
 #container {
+
+    @menu-width: 280px;
+    @menu-speed: 0.3s;
+    #menuLink {
+        position: relative;
+        -webkit-transition: all @menu-speed ease-out;
+        -moz-transition: all @menu-speed ease-out;
+        -ms-transition: all @menu-speed ease-out;
+        -o-transition: all @menu-speed ease-out;
+        transition: all @menu-speed ease-out;
+        &.active{
+            left: @menu-width;
+            width: @menu-width;
+        }
+    }
+    #menu {
+        margin-left: -@menu-width; /* "#menu" width */
+        width: @menu-width;
+        position: fixed;
+        top: 0;
+        left: -@menu-width;
+        bottom: 0;
+        z-index: 1000; /* so the menu or its navicon stays above all content */
+        background: #191818;
+        overflow-y: auto;
+        -webkit-transition: all @menu-speed ease-out;
+        -moz-transition: all @menu-speed ease-out;
+        -ms-transition: all @menu-speed ease-out;
+        -o-transition: all @menu-speed ease-out;
+        transition: all @menu-speed ease-out;
+        &.active{
+            left: @menu-width;
+            width: @menu-width;
+        }
+    }
+
     #todo {
         opacity: 0;
     }
@@ -199,7 +235,7 @@ a {
         }
         .edit-container {
             position: absolute;
-            width: 100%;   
+            width: 100%;
             cursor: pointer;
             background-color: #FFF;
             a {

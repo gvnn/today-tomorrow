@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Today Tomorrow</title>
+        <title>TodayTomorrow</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <link href="assets/css/style.css" rel="stylesheet">
@@ -44,6 +44,10 @@
                 </div>
             {{/notSignedIn}}
             {{#signedIn}}
+                <a id="menuLink" proxy-tap="toggleMenu" class="menu-link">
+                    menu
+                </a>
+                <div id="menu"></div>
                 <div id="logout">
                     <a proxy-tap="disconnect">Disconnect from Dropbox</a>
                 </div>

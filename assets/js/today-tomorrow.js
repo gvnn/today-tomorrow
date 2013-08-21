@@ -320,6 +320,10 @@
                     $(event.node).blur();
                 }
             },
+            toggleMenu: function(event) {
+                $("#menuLink").toggleClass('active');
+                $("#menu").toggleClass('active');
+            },
             move: function(event, direction){
                 ga('send', 'event', 'move', direction);
                 var task = this.get(event.keypath);
