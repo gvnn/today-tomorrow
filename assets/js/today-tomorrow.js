@@ -13,7 +13,7 @@
                             '<div proxy-click="unedit" class="edit-container">' +
                                 ' <a proxy-click="complete:{{i}}">{{( completed ? \'Not Done\' : \'Done\' )}}</a>' +
                                 ' <a proxy-click="move:{{( date == todayDate() ? \'tomorrow\' : \'today\' )}}">{{( date == todayDate() ? \'Tomorrow\' : \'Today\' )}}</a>' +
-                                ' <a proxy-click="forget:{{i}}">Forget</a>' +
+                                ' <a proxy-click="forget:{{i}}">Delete</a>' +
                             '</div>' +
                             '{{/.editing}}' +
                         '</div></li>';
@@ -321,7 +321,6 @@
                 }
             },
             toggleMenu: function(event) {
-                $("#menuLink").toggleClass('active');
                 $("#menu").toggleClass('active');
             },
             move: function(event, direction){

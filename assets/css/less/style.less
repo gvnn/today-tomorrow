@@ -59,15 +59,32 @@ a {
     @menu-width: 280px;
     @menu-speed: 0.3s;
     #menuLink {
-        position: relative;
-        -webkit-transition: all @menu-speed ease-out;
-        -moz-transition: all @menu-speed ease-out;
-        -ms-transition: all @menu-speed ease-out;
-        -o-transition: all @menu-speed ease-out;
-        transition: all @menu-speed ease-out;
-        &.active{
-            left: @menu-width;
-            width: @menu-width;
+        text-indent: -10000px;
+        display: block;
+        height: 30px;
+        width: 20px;
+        position: absolute;
+        z-index: 100;
+        &.menu-link-off {
+            left: 10px;
+            top: 10px;
+        }
+        &.menu-link-active {
+            right: 10px;
+            top: 10px;
+        }
+        .icon-bar {
+            margin-top: 3px;
+            display: block;
+            width: 18px;
+            height: 2px;
+            background-color: #f5f5f5;
+            -webkit-border-radius: 1px;
+            -moz-border-radius: 1px;
+            border-radius: 1px;
+            -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+            -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
         }
     }
     #menu {
@@ -78,7 +95,7 @@ a {
         left: -@menu-width;
         bottom: 0;
         z-index: 1000; /* so the menu or its navicon stays above all content */
-        background: #191818;
+        background: #3d4047;
         overflow-y: auto;
         -webkit-transition: all @menu-speed ease-out;
         -moz-transition: all @menu-speed ease-out;

@@ -11,6 +11,21 @@
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/img/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="assets/img/apple-touch-icon-57-precomposed.png">
         <link rel="apple-touch-startup-image" href="assets/img/startup.png">
+        <link href="assets/img/startup-iphone.png"
+            media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+            rel="apple-touch-startup-image">
+        <link href="assets/img/startup-iphone-retina.png"
+            media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image">
+        <link href="assets/img/startup-iphone-tall-retina.png"
+            media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image">
+        <link href="assets/img/startup-ipad.png"
+            media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1)"
+            rel="apple-touch-startup-image">
+        <link href="assets/img/startup-ipad-retina.png"
+            media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+            rel="apple-touch-startup-image">
         <link rel="shortcut icon" href="assets/img/favicon.ico">
     </head>
     <body>
@@ -44,10 +59,18 @@
                 </div>
             {{/notSignedIn}}
             {{#signedIn}}
-                <a id="menuLink" proxy-tap="toggleMenu" class="menu-link">
-                    menu
+                <a id="menuLink" proxy-tap="toggleMenu" class="menu-link-off">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </a>
-                <div id="menu"></div>
+                <div id="menu">
+                    <a id="menuLink" proxy-tap="toggleMenu" class="menu-link-active">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                </div>
                 <div id="logout">
                     <a proxy-tap="disconnect">Disconnect from Dropbox</a>
                 </div>
