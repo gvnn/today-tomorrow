@@ -7,7 +7,8 @@
 @cyan: #34e0de;
 @grey: #4a4a4a;
 @black: #2c2c2c;
-@pink:  #c374d0;
+@pink: #c374d0;
+@purple: #55335A;
 @blue: #3892e3;
 @green: #758365;
 @dark-green: #474C40;
@@ -447,11 +448,51 @@ a {
         }
     }
     &.grey-black {
-        #todayContainer {
+        #todayContainer, #tomorrowContainer {
             background-color: @grey;
+            .new-todo {
+                .new-input-form {
+                    input {
+                        background-color: @grey;
+                    }
+                }
+            }
+            .edit-container {
+                background-color: @grey;
+            }
         }
         #tomorrowContainer {
             background-color: @black;
+            .edit-container {
+                background-color: @black;
+            }
+            .new-todo {
+                a {
+                    color: @grey;
+                    border-bottom: 1px solid @grey;
+                }
+                .new-input-form {
+                    input {
+                        color: @grey;
+                        background-color: @black;
+                        border-color: @grey;
+                    }
+                }
+            }
+            #tomorrowItemsList {
+                li {
+                    .edit-container {
+                        background-color: @black;
+                        a {
+                            color: @grey;
+                            &:hover {
+                                color: @grey;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     &.white-pink {
@@ -460,6 +501,36 @@ a {
         }
         #tomorrowContainer {
             background-color: @pink;
+            .edit-container {
+                background-color: @pink;
+            }
+            .new-todo {
+                a {
+                    color: @purple;
+                    border-bottom: 1px solid @purple;
+                }
+                .new-input-form {
+                    input {
+                        color: @purple;
+                        background-color: @pink;
+                        border-color: @purple;
+                    }
+                }
+            }
+            #tomorrowItemsList {
+                li {
+                    .edit-container {
+                        background-color: @pink;
+                        a {
+                            color: @purple;
+                            &:hover {
+                                color: @black;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     &.white-blue {
@@ -468,6 +539,36 @@ a {
         }
         #tomorrowContainer {
             background-color: @blue;
+            .edit-container {
+                background-color: @blue;
+            }
+            .new-todo {
+                a {
+                    color: @dark-blue;
+                    border-bottom: 1px solid @dark-blue;
+                }
+                .new-input-form {
+                    input {
+                        color: @dark-blue;
+                        background-color: @blue;
+                        border-color: @dark-blue;
+                    }
+                }
+            }
+            #tomorrowItemsList {
+                li {
+                    .edit-container {
+                        background-color: @blue;
+                        a {
+                            color: @dark-blue;
+                            &:hover {
+                                color: @black;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     &.white {
