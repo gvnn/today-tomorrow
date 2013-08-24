@@ -11,6 +11,7 @@
 @blue: #3892e3;
 @green: #758365;
 @dark-green: #474C40;
+@dark-blue: #1C4A74;
 
 .centered-div(@width: 0, @height: 0) {
     width: @width;
@@ -475,22 +476,132 @@ a {
         }
         #tomorrowContainer {
             background-color: @white;
+            .edit-container {
+                background-color: @white;
+            }
+            .new-todo {
+                a {
+                    color: @cyan;
+                    border-bottom: 1px solid @cyan;
+                }
+                .new-input-form {
+                    input {
+                        color: @cyan;
+                        background-color: @white;
+                        border-color: @cyan;
+                    }
+                }
+            }
+            #tomorrowItemsList {
+                li {
+                    .edit-container {
+                        background-color: @white;
+                        a {
+                            color: @cyan;
+                            &:hover {
+                                color: @black;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     &.blue {
         #todayContainer {
             background-color: @blue;
+            .new-todo {
+                .new-input-form {
+                    input {
+                        background-color: @blue;
+                    }
+                }
+            }
+            .edit-container {
+                background-color: @blue;
+            }
         }
         #tomorrowContainer {
             background-color: @blue;
+            .edit-container {
+                background-color: @blue;
+            }
+            .new-todo {
+                a {
+                    color: @dark-blue;
+                    border-bottom: 1px solid @dark-blue;
+                }
+                .new-input-form {
+                    input {
+                        color: @dark-blue;
+                        background-color: @blue;
+                        border-color: @dark-blue;
+                    }
+                }
+            }
+            #tomorrowItemsList {
+                li {
+                    .edit-container {
+                        background-color: @blue;
+                        a {
+                            color: @dark-blue;
+                            &:hover {
+                                color: @black;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     &.black {
-        #todayContainer {
+        #todayContainer, #tomorrowContainer {
             background-color: @black;
+            .new-todo {
+                .new-input-form {
+                    input {
+                        background-color: @black;
+                    }
+                }
+            }
+            .edit-container {
+                background-color: @black;
+            }
         }
         #tomorrowContainer {
             background-color: @black;
+            .edit-container {
+                background-color: @black;
+            }
+            .new-todo {
+                a {
+                    color: @grey;
+                    border-bottom: 1px solid @grey;
+                }
+                .new-input-form {
+                    input {
+                        color: @grey;
+                        background-color: @black;
+                        border-color: @grey;
+                    }
+                }
+            }
+            #tomorrowItemsList {
+                li {
+                    .edit-container {
+                        background-color: @black;
+                        a {
+                            color: @grey;
+                            &:hover {
+                                color: @grey;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     &.green {
