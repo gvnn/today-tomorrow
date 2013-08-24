@@ -57,12 +57,13 @@ a {
 }
 
 #logout {
-    position: absolute;
-    right: 0;
-    padding: 10px;
-    z-index: 100;
+    text-align: center;
+    bottom: 10px;
+    width: 100%;
     a {
-        font-size: 70%;
+        color: #FFF;
+        font-weight: lighter;
+        text-decoration: underline;
     }
 }
 
@@ -123,8 +124,33 @@ a {
             font-weight: lighter;
             margin: 5px;
         }
+        .title {
+            margin-top: 1em;
+            margin-bottom: 2em;
+            font-size: 120%;
+            text-align: center;
+            color: @white;
+            span.tomorrow {
+                color: @cyan;
+            }
+        }
         .option {
-            padding: 15px;
+            padding: 10px;
+            &.random {
+                padding-left: 10px;
+                padding-top: 0px;
+                padding-bottom: 0px;
+                a {
+                    color: #606060;
+                    text-decoration: underline;
+                    &.active {
+                        color: @white;
+                    }
+                }
+            }
+            &.themes {
+                height: 180px;
+            }
         }
         .theme-options {
             list-style: none;

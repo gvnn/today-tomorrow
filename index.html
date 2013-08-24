@@ -40,9 +40,6 @@
                 <a href="#" id="refresh">Refresh page.</a>
                 -
             </span>
-            <a href="https://github.com/gvnn/today-tomorrow#readme" target="_blank">
-                about
-            </a>
         </div>
         <script src="//www.dropbox.com/static/api/1/dropbox-datastores-0.1.0-b3.js" type="text/javascript"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -70,7 +67,18 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <div class="option">
+                    <div class="title">
+                        Today<span class="tomorrow">Tomorrow</span>
+                    </div>
+                    <div class="option random">
+                        <h4>
+                            Random Language &nbsp;
+                            <a proxy-tap="random:on" class='{{( randomLanguage ? "active" : "" )}}'>ON</a>
+                            /
+                            <a proxy-tap="random:off" class='{{( !randomLanguage ? "active" : "" )}}'>OFF</a>
+                        </h4>
+                    </div>
+                    <div class="option themes">
                         <h4>Theme</h4>
                         <ul class="theme-options">
                             {{#themes:i}}
@@ -83,9 +91,14 @@
                             {{/themes}}
                         </ul>
                     </div>
-                </div>
-                <div id="logout">
-                    <a proxy-tap="disconnect">Disconnect from Dropbox</a>
+                    <div id="logout">
+                        <p><a proxy-tap="disconnect">Sign out</a></p>
+                        <p>
+                        <a href="https://github.com/gvnn/today-tomorrow#readme" target="_blank">
+                            Credits
+                        </a>
+                        </p>
+                    </div>
                 </div>
                 <div id="todo" class="{{selectedTheme}}">
                     <div id="todayContainer" style='min-height: {{ minHeight() }}px;'>

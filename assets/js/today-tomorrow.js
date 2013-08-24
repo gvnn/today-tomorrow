@@ -19,6 +19,7 @@
                         '</div></li>';
 
     var translations = {
+        en: { today: "Today", tomorrow: "Tomorrow"},
         af: { today: "Vandag", tomorrow: "m&#244;re"},
         sq: { today: "sot", tomorrow: "nes&#235;r"},
         ar: { dir: "rtl", today: "&#1575;&#1604;&#1610;&#1608;&#1605;", tomorrow: "&#1594;&#1583;&#1575;"},
@@ -31,7 +32,6 @@
         cs: { today: "dnes", tomorrow: "z&#237;tra"},
         da: { today: "i dag", tomorrow: "i morgen"},
         nl: { today: "vandaag", tomorrow: "morgen"},
-        en: { today: "Today", tomorrow: "Tomorrow"},
         et: { today: "t&#228;na", tomorrow: "homme"},
         fi: { today: "t&#228;n&#228;&#228;n", tomorrow: "huomenna"},
         fr: { today: "aujourd'hui", tomorrow: "demain"},
@@ -82,8 +82,10 @@
     module.defaultTheme = "white-cyan";
     module.options = {
         selectedTheme: module.defaultTheme,
+        randomLanguage: false,
         exists: false
     };
+    module.lang = translations.en;
 
     module.getToday = function(){
         var d = new Date();
@@ -102,8 +104,6 @@
         var keys = Object.keys(translations);
         return translations[keys[ keys.length * Math.random() << 0]];
     };
-
-    module.lang = randomLanguage();
 
     var loadUserInfo = function(ractiveInstance){
         module.client.getUserInfo(
@@ -183,7 +183,12 @@
                 var options = module.optionsTable.query({});
                 if (options.length > 0) {
                     module.options.selectedTheme = options[0].get("selectedTheme");
+                    module.options.randomLanguage = options[0].get("randomLanguage");
                     module.options.exists = true;
+                }
+
+                if (module.options.randomLanguage) {
+                    module.lang = randomLanguage();
                 }
 
                 module.datastore.recordsChanged.addListener(function (event) {
@@ -282,6 +287,7 @@
                     'green'
                 ],
                 selectedTheme: module.options.selectedTheme,
+                randomLanguage: module.options.randomLanguage,
                 minHeight: function(){
                     var minHeight = $(window).height() / 2;
                     return minHeight < MIN_HEIGHT ? MIN_HEIGHT : minHeight;
@@ -461,6 +467,10 @@
             changeTheme: function(event, index) {
                 this.set("selectedTheme", this.data.themes[index]);
                 setOption("selectedTheme", this.data.themes[index]);
+            },
+            random: function(event, action){
+                this.set("randomLanguage", (action == "on"));
+                setOption("randomLanguage", (action == "on"));
             }
         });
     };
