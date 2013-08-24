@@ -2,6 +2,16 @@
 
 @base-font-family: 'Montserrat', sans-serif;
 
+// theme colors
+@white: #FFF;
+@cyan: #34e0de;
+@grey: #4a4a4a;
+@black: #2c2c2c;
+@pink:  #c374d0;
+@blue: #3892e3;
+@green: #758365;
+@dark-green: #474C40;
+
 .centered-div(@width: 0, @height: 0) {
     width: @width;
     height: @height;
@@ -106,6 +116,104 @@ a {
             left: @menu-width;
             width: @menu-width;
         }
+        h4 {
+            color: #FFF;
+            font-weight: lighter;
+            margin: 5px;
+        }
+        .option {
+            padding: 15px;
+        }
+        .theme-options {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li {
+                display: block;
+                float: left;
+                margin: 5px;
+                padding: 0;
+                &.selected {
+                    background-color: #9e9fa3;
+                }
+            }
+            .theme-option {
+                display: block;
+                width: 40px;
+                height: 40px;
+                margin: 5px;
+                cursor: pointer;
+                span {
+                    display: block;
+                    height: 20px;
+                    width: 40px;
+                }
+                &.white-cyan {
+                    .top {
+                        background-color: @white;
+                    }
+                    .bottom {
+                        background-color: @cyan;
+                    }
+                }
+                &.grey-black {
+                    .top {
+                        background-color: @grey;
+                    }
+                    .bottom {
+                        background-color: @black;
+                    }
+                }
+                &.white-pink {
+                    .top {
+                        background-color: @white;
+                    }
+                    .bottom {
+                        background-color: @pink;
+                    }
+                }
+                &.white-blue {
+                    .top {
+                        background-color: @white;
+                    }
+                    .bottom {
+                        background-color: @blue;
+                    }
+                }
+                &.white {
+                    .top {
+                        background-color: @white;
+                    }
+                    .bottom {
+                        background-color: @white;
+                    }
+                }
+                &.blue {
+                    .top {
+                        background-color: @blue;
+                    }
+                    .bottom {
+                        background-color: @blue;
+                    }
+                }
+                &.black {
+                    .top {
+                        background-color: @black;
+                    }
+                    .bottom {
+                        background-color: @black;
+                    }
+                }
+                &.green {
+                    .top {
+                        background-color: @green;
+                    }
+                    .bottom {
+                        background-color: @green;
+                    }
+                }
+            }
+        }
     }
 
     #todo {
@@ -130,6 +238,13 @@ a {
             a {
                 color: #D4D4D4;
             }
+            .new-input-form {
+                input {
+                    font-size: 15px;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
         }
         #todayItemsList {
             list-style: none;
@@ -142,7 +257,7 @@ a {
         }
     }
     #tomorrowContainer {
-        background-color: #34E0DE;
+        background-color: @cyan;
         .new-todo {
             a {
                 color: #47918F;
@@ -151,8 +266,11 @@ a {
             .new-input-form {
                 input {
                     font-family: @base-font-family;
+                    font-size: 15px;
+                    margin: 0;
+                    padding: 0;
                     color: #47918F;
-                    background-color: #34E0DE;
+                    background-color: @cyan;
                     border-bottom: 1px solid #47918F;
                 }
             }
@@ -165,7 +283,7 @@ a {
                 padding-top: 20px;
                 padding-bottom: 20px;
                 .edit-container {
-                    background-color: #34e0de;
+                    background-color: @cyan;
                     a {
                         color: #47918f;
                         &:hover {
@@ -177,8 +295,7 @@ a {
             }
         }
         .form-container {
-
-                padding-bottom: 40px;
+            padding-bottom: 40px;
         }
     }
 
@@ -315,5 +432,113 @@ a {
 @media @mobile {
     h2 {
         font-size: 75%;
+    }
+}
+
+/* themes */
+#todo {
+    &.white-cyan {
+        #todayContainer {
+            background-color: @white;
+        }
+        #tomorrowContainer {
+            background-color: @cyan;
+        }
+    }
+    &.grey-black {
+        #todayContainer {
+            background-color: @grey;
+        }
+        #tomorrowContainer {
+            background-color: @black;
+        }
+    }
+    &.white-pink {
+        #todayContainer {
+            background-color: @white;
+        }
+        #tomorrowContainer {
+            background-color: @pink;
+        }
+    }
+    &.white-blue {
+        #todayContainer {
+            background-color: @white;
+        }
+        #tomorrowContainer {
+            background-color: @blue;
+        }
+    }
+    &.white {
+        #todayContainer {
+            background-color: @white;
+        }
+        #tomorrowContainer {
+            background-color: @white;
+        }
+    }
+    &.blue {
+        #todayContainer {
+            background-color: @blue;
+        }
+        #tomorrowContainer {
+            background-color: @blue;
+        }
+    }
+    &.black {
+        #todayContainer {
+            background-color: @black;
+        }
+        #tomorrowContainer {
+            background-color: @black;
+        }
+    }
+    &.green {
+        #todayContainer {
+            background-color: @green;
+            .new-todo {
+                .new-input-form {
+                    input {
+                        background-color: @green;
+                    }
+                }
+            }
+            .edit-container {
+                background-color: @green;
+            }
+        }
+        #tomorrowContainer {
+            background-color: @green;
+            .edit-container {
+                background-color: @green;
+            }
+            .new-todo {
+                a {
+                    color: @dark-green;
+                    border-bottom: 1px solid @dark-green;
+                }
+                .new-input-form {
+                    input {
+                        color: @dark-green;
+                        background-color: @green;
+                        border-color: @dark-green;
+                    }
+                }
+            }
+            #tomorrowItemsList {
+                li {
+                    .edit-container {
+                        background-color: @green;
+                        a {
+                            color: @dark-green;
+                            &:hover {
+                                color: @black;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -79,6 +79,11 @@
     var module = {};
     module.ractive = null;
     module.client = null;
+    module.defaultTheme = "white-cyan";
+    module.options = {
+        selectedTheme: module.defaultTheme,
+        exists: false
+    };
 
     module.getToday = function(){
         var d = new Date();
@@ -100,10 +105,10 @@
 
     module.lang = randomLanguage();
 
-    var loadUserInfo = function(){
+    var loadUserInfo = function(ractiveInstance){
         module.client.getUserInfo(
             function(err, obj){
-                module.ractive.set({
+                ractiveInstance.set({
                     user: obj,
                     signedIn: true,
                     notSignedIn: false
@@ -152,33 +157,67 @@
         return result;
     };
 
-    var linkDataUpdates = function(){
-        var datastoreManager = module.client.getDatastoreManager();
-        datastoreManager.openDefaultDatastore(function (error, datastore) {
-            module.datastore = datastore;
-            module.taskTable = datastore.getTable('tasks');
+    var linkDataUpdates = function(ractiveInstance){
+        module.taskTable = module.datastore.getTable('tasks');
+        bumpTasks();
 
-            bumpTasks();
+        var todayItems = loadTasks(module.getToday());
+        var tomorrowItems = loadTasks(module.getTomorrow());
 
-            var todayItems = loadTasks(module.getToday());
-            var tomorrowItems = loadTasks(module.getTomorrow());
-
-            module.ractive.set({
-                loadingInfo: false,
-                todayItems: todayItems,
-                tomorrowItems: tomorrowItems
-            });
-
-            module.datastore.recordsChanged.addListener(function (event) {
-                if (!event._local) {
-                    showRefresh();
-                }
-            });
+        ractiveInstance.set({
+            loadingInfo: false,
+            todayItems: todayItems,
+            tomorrowItems: tomorrowItems
         });
+    };
+
+    var loadOptions = function(callback){
+        if (module.client.isAuthenticated()) {
+            var datastoreManager = module.client.getDatastoreManager();
+            datastoreManager.openDefaultDatastore(function (error, datastore) {
+
+                module.datastore = datastore;
+
+                module.optionsTable = datastore.getTable('options');
+
+                var options = module.optionsTable.query({});
+                if (options.length > 0) {
+                    module.options.selectedTheme = options[0].get("selectedTheme");
+                    module.options.exists = true;
+                }
+
+                module.datastore.recordsChanged.addListener(function (event) {
+                    if (!event._local) {
+                        showRefresh();
+                    }
+                });
+
+                if (callback) {
+                    callback();
+                }
+
+            });
+        } else {
+            if (callback) {
+                callback();
+            }
+        }
     };
 
     var showRefresh = function(){
         $(".update").show();
+    };
+
+    var setOption = function(option, value){
+        if (module.options.exists) {
+            var options = module.optionsTable.query({});
+            options[0].set(option, value);
+        } else {
+            var newOptions = {};
+            newOptions[option] = value;
+            module.optionsTable.insert(newOptions);
+            module.options.exists = true;
+        }
     };
 
     var addItemToDropbox = function(task){
@@ -216,19 +255,7 @@
         }
     };
 
-    module.init = function(){
-
-        $(window).resize(resizeBoxes);
-        resizeBoxes();
-
-        module.client = new Dropbox.Client({key: DROPBOX_APP_KEY});
-
-        module.client.authenticate({interactive:false}, function (error) {
-            if (error) {
-                alert('Authentication error: ' + error);
-            }
-        });
-
+    var loadRactive = function(){
         module.ractive = new Ractive({
             el: '#app',
             partials: {
@@ -244,6 +271,17 @@
                 addingTomorrow: false,
                 todayItems: [],
                 tomorrowItems: [],
+                themes: [
+                    'white-cyan',
+                    'grey-black',
+                    'white-pink',
+                    'white-blue',
+                    'white',
+                    'blue',
+                    'black',
+                    'green'
+                ],
+                selectedTheme: module.options.selectedTheme,
                 minHeight: function(){
                     var minHeight = $(window).height() / 2;
                     return minHeight < MIN_HEIGHT ? MIN_HEIGHT : minHeight;
@@ -263,8 +301,8 @@
             },
             complete: function(){
                 if (module.client.isAuthenticated()) {
-                    loadUserInfo();
-                    linkDataUpdates();
+                    loadUserInfo(this);
+                    linkDataUpdates(this);
                 } else {
                     this.set({
                         signedIn: false,
@@ -419,8 +457,28 @@
             },
             completed: function(event) {
                 this.set(event.keypath + ".completed", !this.get(event.keypath + ".completed"));
+            },
+            changeTheme: function(event, index) {
+                this.set("selectedTheme", this.data.themes[index]);
+                setOption("selectedTheme", this.data.themes[index]);
             }
         });
+    };
+
+    module.init = function(){
+
+        $(window).resize(resizeBoxes);
+        resizeBoxes();
+
+        module.client = new Dropbox.Client({key: DROPBOX_APP_KEY});
+
+        module.client.authenticate({interactive:false}, function (error) {
+            if (error) {
+                alert('Authentication error: ' + error);
+            }
+        });
+
+        loadOptions(loadRactive);
     };
 
     $.extend($.fn, {

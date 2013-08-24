@@ -70,11 +70,24 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
+                    <div class="option">
+                        <h4>Theme</h4>
+                        <ul class="theme-options">
+                            {{#themes:i}}
+                            <li proxy-tap="changeTheme:{{i}}" class='{{( selectedTheme == themes[i] ? "selected" : "" )}}'>
+                                <div class="theme-option {{themes[i]}}">
+                                    <span class="top"></span>
+                                    <span class="bottom"></span>
+                                </div>
+                            </li>
+                            {{/themes}}
+                        </ul>
+                    </div>
                 </div>
                 <div id="logout">
                     <a proxy-tap="disconnect">Disconnect from Dropbox</a>
                 </div>
-                <div id="todo">
+                <div id="todo" class="{{selectedTheme}}">
                     <div id="todayContainer" style='min-height: {{ minHeight() }}px;'>
                         <div class="title">
                             <h2 dir="{{ dir() }}">{{{ today() }}}</h2>
