@@ -70,6 +70,14 @@
                     <div class="title">
                         Today<span class="tomorrow">Tomorrow</span>
                     </div>
+                    <div class="option lang">
+                        <h4>Language</h4>
+                        <select>
+                            {{#languages:i}}
+                                <option value="{{i}}">{{name}}</option>
+                            {{/languages}}
+                        </select>
+                    </div>
                     <div class="option random">
                         <h4>
                             Random Language &nbsp;

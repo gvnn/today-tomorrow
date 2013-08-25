@@ -19,61 +19,60 @@
                         '</div></li>';
 
     var translations = {
-        en: { today: "Today", tomorrow: "Tomorrow"},
-        af: { today: "Vandag", tomorrow: "m&#244;re"},
-        sq: { today: "sot", tomorrow: "nes&#235;r"},
-        ar: { dir: "rtl", today: "&#1575;&#1604;&#1610;&#1608;&#1605;", tomorrow: "&#1594;&#1583;&#1575;"},
-        be: { today: "&#1089;&#1105;&#1085;&#1085;&#1103;", tomorrow: "&#1079;&#1072;&#1118;&#1090;&#1088;&#1072;"},
-        bs: { today: "danas", tomorrow: "sutra"},
-        bg: { today: "&#1076;&#1085;&#1077;&#1089;", tomorrow: "&#1091;&#1090;&#1088;&#1077;"},
-        ca: { today: "avui", tomorrow: "dem&#224;"},
-        zh: { today: "&#20170;&#22825;", tomorrow: "&#26126;&#22825;"},
-        hr: { today: "danas", tomorrow: "sutra"},
-        cs: { today: "dnes", tomorrow: "z&#237;tra"},
-        da: { today: "i dag", tomorrow: "i morgen"},
-        nl: { today: "vandaag", tomorrow: "morgen"},
-        et: { today: "t&#228;na", tomorrow: "homme"},
-        fi: { today: "t&#228;n&#228;&#228;n", tomorrow: "huomenna"},
-        fr: { today: "aujourd'hui", tomorrow: "demain"},
-        gl: { today: "hoxe", tomorrow: "ma&#241;&#225;"},
-        de: { today: "heute", tomorrow: "morgen"},
-        el: { today: "&#963;&#942;&#956;&#949;&#961;&#945;", tomorrow: "&#945;&#973;&#961;&#953;&#959;"},
-        ht: { today: "jodi a", tomorrow: "demen"},
-        he: { dir: "rtl", today: "&#1492;&#1497;&#1493;&#1501;", tomorrow: "&#1502;&#1495;&#1512;"},
-        hi: { today: "&#2310;&#2332;", tomorrow: "&#2325;&#2354;"},
-        hu: { today: "ma", tomorrow: "holnap"},
-        is: { today: "&#237; dag", tomorrow: "morgun"},
-        id: { today: "hari ini", tomorrow: "besok"},
-        ga: { today: "l&#225; at&#225; inniu ann", tomorrow: "am&#225;rach"},
-        it: { today: "oggi", tomorrow: "domani"},
-        ja: { today: "&#20170;&#26085;", tomorrow: "&#26126;&#26085;"},
-        ko: { today: "&#50724;&#45720;", tomorrow: "&#45236;&#51068;"},
-        lv: { today: "&#353;odien", tomorrow: "r&#299;t"},
-        lt: { today: "&#353;iandien", tomorrow: "rytoj"},
-        mk: { today: "&#1076;&#1077;&#1085;&#1077;&#1089;", tomorrow: "&#1091;&#1090;&#1088;&#1077;"},
-        ms: { today: "hari ini", tomorrow: "esok"},
-        mt: { today: "llum", tomorrow: "g&#295;ada"},
-        mo: { today: "azi", tomorrow: "m&#226;ine"},
-        no: { today: "i dag", tomorrow: "i morgen"},
-        nb: { today: "i dag", tomorrow: "i morgen"},
-        fa: { dir: "rtl", today: "&#1575;&#1605;&#1585;&#1608;&#1586;", tomorrow: "&#1601;&#1585;&#1583;&#1575;"},
-        pl: { today: "dzisiaj", tomorrow: "jutro"},
-        pt: { today: "hoje", tomorrow: "amanh&#227;"},
-        ro: { today: "azi", tomorrow: "m&#226;ine"},
-        ru: { today: "&#1089;&#1077;&#1075;&#1086;&#1076;&#1085;&#1103;", tomorrow: "&#1079;&#1072;&#1074;&#1090;&#1088;&#1072;"},
-        sr: { today: "&#1076;&#1072;&#1085;&#1072;&#1089;", tomorrow: "&#1089;&#1091;&#1090;&#1088;&#1072;"},
-        sk: { today: "dnes", tomorrow: "zajtra"},
-        sl: { today: "danes", tomorrow: "jutri"},
-        es: { today: "hoy", tomorrow: "ma&#241;ana"},
-        sw: { today: "leo", tomorrow: "kesho"},
-        sv: { today: "i dag", tomorrow: "i morgon"},
-        tl: { today: "ngayon", tomorrow: "bukas"},
-        th: { today: "&#3623;&#3633;&#3609;&#3609;&#3637;&#3657;", tomorrow: "&#3623;&#3633;&#3609;&#3614;&#3619;&#3640;&#3656;&#3591;&#3609;&#3637;&#3657;"},
-        tr: { today: "bug&#252;n", tomorrow: "yar&#305;n"},
-        uk: { today: "&#1089;&#1100;&#1086;&#1075;&#1086;&#1076;&#1085;&#1110;", tomorrow: "&#1079;&#1072;&#1074;&#1090;&#1088;&#1072;"},
-        vi: { today: "h&#244;m nay", tomorrow: "mai"},
-        cy: { today: "heddiw", tomorrow: "yfory"},
-        yi: { dir: "rtl", today: "&#1492;&#1497;&#1497;&#1463;&#1504;&#1496;", tomorrow: "&#1502;&#1488;&#1464;&#1512;&#1490;&#1503;"}
+        en: { name: "English", today: "Today", tomorrow: "Tomorrow"},
+        af: { name: "Afrikaans", today: "Vandag", tomorrow: "m&#244;re"},
+        sq: { name: "Albanian", today: "sot", tomorrow: "nes&#235;r"},
+        ar: { name: "Arabic", dir: "rtl", today: "&#1575;&#1604;&#1610;&#1608;&#1605;", tomorrow: "&#1594;&#1583;&#1575;"},
+        be: { name: "Belarusian", today: "&#1089;&#1105;&#1085;&#1085;&#1103;", tomorrow: "&#1079;&#1072;&#1118;&#1090;&#1088;&#1072;"},
+        bs: { name: "Bosnian", today: "danas", tomorrow: "sutra"},
+        bg: { name: "Bulgarian", today: "&#1076;&#1085;&#1077;&#1089;", tomorrow: "&#1091;&#1090;&#1088;&#1077;"},
+        ca: { name: "Catalan", today: "avui", tomorrow: "dem&#224;"},
+        zh: { name: "Chinese", today: "&#20170;&#22825;", tomorrow: "&#26126;&#22825;"},
+        hr: { name: "Croatian", today: "danas", tomorrow: "sutra"},
+        cs: { name: "Czech", today: "dnes", tomorrow: "z&#237;tra"},
+        da: { name: "Danish", today: "i dag", tomorrow: "i morgen"},
+        nl: { name: "Dutch", today: "vandaag", tomorrow: "morgen"},
+        et: { name: "Estonian", today: "t&#228;na", tomorrow: "homme"},
+        fi: { name: "Finnish", today: "t&#228;n&#228;&#228;n", tomorrow: "huomenna"},
+        fr: { name: "French", today: "aujourd'hui", tomorrow: "demain"},
+        gl: { name: "Galician", today: "hoxe", tomorrow: "ma&#241;&#225;"},
+        de: { name: "German", today: "heute", tomorrow: "morgen"},
+        el: { name: "Greek", today: "&#963;&#942;&#956;&#949;&#961;&#945;", tomorrow: "&#945;&#973;&#961;&#953;&#959;"},
+        ht: { name: "Haitian", today: "jodi a", tomorrow: "demen"},
+        he: { name: "Hebrew", dir: "rtl", today: "&#1492;&#1497;&#1493;&#1501;", tomorrow: "&#1502;&#1495;&#1512;"},
+        hi: { name: "Hindi", today: "&#2310;&#2332;", tomorrow: "&#2325;&#2354;"},
+        hu: { name: "Hungarian", today: "ma", tomorrow: "holnap"},
+        is: { name: "Icelandic", today: "&#237; dag", tomorrow: "morgun"},
+        id: { name: "Indonesian", today: "hari ini", tomorrow: "besok"},
+        ga: { name: "Irish", today: "l&#225; at&#225; inniu ann", tomorrow: "am&#225;rach"},
+        it: { name: "Italian", today: "oggi", tomorrow: "domani"},
+        ja: { name: "Japanese", today: "&#20170;&#26085;", tomorrow: "&#26126;&#26085;"},
+        ko: { name: "Korean", today: "&#50724;&#45720;", tomorrow: "&#45236;&#51068;"},
+        lv: { name: "Latvian", today: "&#353;odien", tomorrow: "r&#299;t"},
+        lt: { name: "Lithuanian", today: "&#353;iandien", tomorrow: "rytoj"},
+        mk: { name: "Macedonian", today: "&#1076;&#1077;&#1085;&#1077;&#1089;", tomorrow: "&#1091;&#1090;&#1088;&#1077;"},
+        ms: { name: "Malay", today: "hari ini", tomorrow: "esok"},
+        mt: { name: "Maltese", today: "llum", tomorrow: "g&#295;ada"},
+        mo: { name: "Moldavian", today: "azi", tomorrow: "m&#226;ine"},
+        no: { name: "Norwegian", today: "i dag", tomorrow: "i morgen"},
+        fa: { name: "Persian", dir: "rtl", today: "&#1575;&#1605;&#1585;&#1608;&#1586;", tomorrow: "&#1601;&#1585;&#1583;&#1575;"},
+        pl: { name: "Polish", today: "dzisiaj", tomorrow: "jutro"},
+        pt: { name: "Portuguese", today: "hoje", tomorrow: "amanh&#227;"},
+        ro: { name: "Romanian", today: "azi", tomorrow: "m&#226;ine"},
+        ru: { name: "Russian", today: "&#1089;&#1077;&#1075;&#1086;&#1076;&#1085;&#1103;", tomorrow: "&#1079;&#1072;&#1074;&#1090;&#1088;&#1072;"},
+        sr: { name: "Serbian", today: "&#1076;&#1072;&#1085;&#1072;&#1089;", tomorrow: "&#1089;&#1091;&#1090;&#1088;&#1072;"},
+        sk: { name: "Slovak", today: "dnes", tomorrow: "zajtra"},
+        sl: { name: "Slovenian", today: "danes", tomorrow: "jutri"},
+        es: { name: "Spanish", today: "hoy", tomorrow: "ma&#241;ana"},
+        sw: { name: "Swahili", today: "leo", tomorrow: "kesho"},
+        sv: { name: "Swedish", today: "i dag", tomorrow: "i morgon"},
+        tl: { name: "Tagalog", today: "ngayon", tomorrow: "bukas"},
+        th: { name: "Thai", today: "&#3623;&#3633;&#3609;&#3609;&#3637;&#3657;", tomorrow: "&#3623;&#3633;&#3609;&#3614;&#3619;&#3640;&#3656;&#3591;&#3609;&#3637;&#3657;"},
+        tr: { name: "Turkish", today: "bug&#252;n", tomorrow: "yar&#305;n"},
+        uk: { name: "Ukrainian", today: "&#1089;&#1100;&#1086;&#1075;&#1086;&#1076;&#1085;&#1110;", tomorrow: "&#1079;&#1072;&#1074;&#1090;&#1088;&#1072;"},
+        vi: { name: "Vietnamese", today: "h&#244;m nay", tomorrow: "mai"},
+        cy: { name: "Welsh", today: "heddiw", tomorrow: "yfory"},
+        yi: { name: "Yiddish", dir: "rtl", today: "&#1492;&#1497;&#1497;&#1463;&#1504;&#1496;", tomorrow: "&#1502;&#1488;&#1464;&#1512;&#1490;&#1503;"}
     };
 
     var module = {};
@@ -103,6 +102,18 @@
     var randomLanguage = function () {
         var keys = Object.keys(translations);
         return translations[keys[ keys.length * Math.random() << 0]];
+    };
+
+    var languagesList = function(){
+        var list = [];
+        var keys = Object.keys(translations);
+        for (var i = 0; i < keys.length; i++) {
+            list.push({
+                name: translations[keys[i]].name,
+                code: keys[i]
+            });
+        }
+        return list;
     };
 
     var loadUserInfo = function(ractiveInstance){
@@ -288,6 +299,7 @@
                 ],
                 selectedTheme: module.options.selectedTheme,
                 randomLanguage: module.options.randomLanguage,
+                languages: languagesList(),
                 minHeight: function(){
                     var minHeight = $(window).height() / 2;
                     return minHeight < MIN_HEIGHT ? MIN_HEIGHT : minHeight;
