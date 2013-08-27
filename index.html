@@ -72,9 +72,9 @@
                     </div>
                     <div class="option lang">
                         <h4>Language</h4>
-                        <select>
+                        <select id="selectedLanguageCode" proxy-change="changeLanguage">
                             {{#languages:i}}
-                                <option value="{{i}}">{{name}}</option>
+                                <option selected='{{( selectedLanguageCode == code )}}' value="{{code}}">{{name}}</option>
                             {{/languages}}
                         </select>
                     </div>
@@ -111,7 +111,7 @@
                 <div id="todo" class="{{selectedTheme}}">
                     <div id="todayContainer" style='min-height: {{ minHeight() }}px;'>
                         <div class="title">
-                            <h2 dir="{{ dir() }}">{{{ today() }}}</h2>
+                            <h2 dir="{{ dir() }}">{{{ lang.today }}}</h2>
                             <ul id="todayItemsList">
                             {{#todayItems:i}}
                                 {{>listItem}}
@@ -133,7 +133,7 @@
                     </div>
                     <div id="tomorrowContainer" style='min-height: {{ minHeight() }}px;'>
                         <div class="title">
-                            <h2 dir="{{ dir() }}">{{{ tomorrow() }}}</h2>
+                            <h2 dir="{{ dir() }}">{{{ lang.tomorrow }}}</h2>
                             <ul id="tomorrowItemsList">
                             {{#tomorrowItems:i}}
                                 {{>listItem}}
