@@ -349,6 +349,7 @@
                 this.set(event.keypath + '.editing', false);
             },
             forget: function(event) {
+                ga('send', 'event', 'forget');
                 module.taskTable.get(this.get(event.keypath + '.ID')).deleteRecord();
                 if(event.keypath.indexOf("todayItems") >= 0) {
                     this.data.todayItems.splice(event.index.i, 1);
@@ -473,15 +474,18 @@
                 this.set(event.keypath + ".completed", !this.get(event.keypath + ".completed"));
             },
             changeTheme: function(event, index) {
+                ga('send', 'event', 'theme', index);
                 this.set("selectedTheme", this.data.themes[index]);
                 setOption("selectedTheme", this.data.themes[index]);
             },
             random: function(event, action){
+                ga('send', 'event', 'randomLanguage', action);
                 this.set("randomLanguage", (action == "on"));
                 setOption("randomLanguage", (action == "on"));
             },
             changeLanguage: function(event){
                 var lang = $(event.node).val();
+                ga('send', 'event', 'changeLanguage', lang);
                 setOption("selectedLanguageCode", lang);
                 this.set("selectedLanguageCode", lang);
                 this.set("lang", translations[lang]);
@@ -500,6 +504,8 @@
         module.client.authenticate({interactive:false}, function (error) {
             if (error) {
                 alert('Authentication error: ' + error);
+            } else {
+                ga('send', 'event', 'authenticate');
             }
         });
 
@@ -521,7 +527,7 @@ ga('create', 'UA-43273123-1', 'herokuapp.com');
 ga('send', 'pageview');
 
 $(function($){
-    if (window.location.protocol != "https:") {
+    if (window.location.protocol != "https:" && window.location.href.indexOf("localhost") < 0) {
        window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
     } else {
         $.fn.todayTomorrow.init();
